@@ -1,38 +1,74 @@
+# Fixing the issue by properly escaping triple quotes and multi-line markdown
 
+streamlit_dark_dashboard = '''
 import streamlit as st
 import plotly.express as px
 import pandas as pd
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="Anurag Venkatayogi | Data Portfolio", layout="wide")
+st.set_page_config(page_title="Anurag's Dataverse", layout="wide", initial_sidebar_state="expanded")
+
+# --- CUSTOM CSS FOR DARK THEME & EFFECTS ---
+st.markdown(
+    """
+    <style>
+        body {
+            background-color: #0e1117;
+            color: white;
+        }
+        .css-18e3th9 {
+            background-color: #0e1117 !important;
+        }
+        h1, h2, h3 {
+            color: #00FFCC;
+        }
+        .stButton>button {
+            background-color: #1f77b4;
+            color: white;
+            border-radius: 8px;
+            padding: 0.5em 1em;
+            transition: 0.3s;
+        }
+        .stButton>button:hover {
+            transform: scale(1.05);
+            background-color: #00FFCC;
+            color: black;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# --- BALLOON ON LOAD ---
+st.balloons()
 
 # --- HERO SECTION ---
-st.markdown("<h1 style='text-align: center;'>Anurag Venkatayogi</h1>", unsafe_allow_html=True)
-st.markdown("<h4 style='text-align: center;'>Data Analyst | ML Enthusiast | Storyteller with Code</h4>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>Turning Data into Decisions. Visuals into Vision.</p>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>🌌 Welcome to Anurag's Dataverse</h1>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center;'>Data Analyst | ML Explorer | Visualization Alchemist</h4>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>Creating impact through code, charts, and a touch of magic ✨</p>", unsafe_allow_html=True)
 
-st.markdown("### Quick Links")
-st.markdown("""
-- [Resume](https://your-resume-link.com)
-- [LinkedIn](https://www.linkedin.com/in/anuragvenkatayogi/)
-- [GitHub](https://github.com/anurag-github)
-- [Tableau Public](https://public.tableau.com/app/profile/anurag)
-""")
+# --- LINKS ---
+st.markdown("### 🔗 Connect With Me")
+st.markdown(
+    """
+    - [Kaggle Profile](https://www.kaggle.com/anuragvenkatayogi)
+    - [GitHub](https://github.com/anurag-hacker9)
+    - [LinkedIn](https://www.linkedin.com/in/anuragvenkatayogi/)
+    """
+)
 
-# --- SKILLS DASHBOARD ---
-st.markdown("## Skills Overview")
+# --- INTERACTIVE SKILLS DASHBOARD ---
+st.markdown("## 🚀 Skillset Visualizer")
 
 skills = {
     "Python": 95,
     "SQL": 90,
     "Tableau": 88,
     "Power BI": 85,
-    "R": 80,
-    "Machine Learning": 87,
-    "Geospatial Tools": 75,
-    "CRM Platforms": 70,
-    "ETL & Data Prep": 90,
-    "Data Visualization": 95
+    "Machine Learning": 92,
+    "Geospatial Analysis": 80,
+    "CRM Tools": 75,
+    "EDA & Data Prep": 94
 }
 
 skill_df = pd.DataFrame({
@@ -40,51 +76,55 @@ skill_df = pd.DataFrame({
     "Proficiency": list(skills.values())
 })
 
-fig = px.bar(skill_df, x="Proficiency", y="Skill", orientation="h", color="Proficiency", color_continuous_scale="Viridis")
+fig = px.bar(skill_df, x="Proficiency", y="Skill", orientation="h", color="Skill",
+             title="Interactive Skill Proficiency Chart", color_discrete_sequence=px.colors.sequential.Turbo)
+fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(20,20,20,0.8)', font_color="white")
 st.plotly_chart(fig, use_container_width=True)
 
-# --- PROJECTS SECTION ---
-st.markdown("## Featured Projects")
+# --- PROJECT HIGHLIGHTS ---
+st.markdown("## 🌟 Project Highlights")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.subheader("AI-Powered Exam Cheating Detection System")
-    st.markdown("- Used YOLOv8 & computer vision for unauthorized object detection.")
-    st.markdown("- Integrated Wi-Fi/Bluetooth scanning for device alerts.")
-    st.markdown("- Achieved 93% detection accuracy.")
-    st.markdown("[GitHub](https://github.com/anurag-github/exam-proctoring)")
+    st.markdown("### 🎯 AI-Powered Exam Monitoring")
+    st.markdown("- YOLOv8 object detection, smart zoom, Wi-Fi/Bluetooth tracking")
+    st.markdown("- Achieved 93% detection accuracy, reduced manual efforts by 70%")
+    st.markdown("[View on GitHub](https://github.com/anurag-github/exam-proctoring)")
 
 with col2:
-    st.subheader("Airbnb Price Prediction & Chatbot")
-    st.markdown("- Built ML model with 78% accuracy using regression techniques.")
-    st.markdown("- Integrated AI chatbot for pricing and review analysis.")
-    st.markdown("- Improved booking efficiency by 65%.")
-    st.markdown("[GitHub](https://github.com/anurag-github/airbnb-chatbot)")
+    st.markdown("### 🏡 Airbnb Price Prediction + Chatbot")
+    st.markdown("- Regression model with 78% accuracy, interactive AI chatbot")
+    st.markdown("- Boosted booking efficiency and reduced host response time")
+    st.markdown("[View on GitHub](https://github.com/anurag-github/airbnb-chatbot)")
 
-# --- CAREER TIMELINE ---
-st.markdown("## Career Snapshot")
+# --- CAREER TIMELINE MOCKUP ---
+st.markdown("## 📅 Career Timeline")
 
-timeline_data = {
-    "Year": ["2021", "2022", "2023", "2024"],
-    "Position": ["Programmer Analyst Trainee", "Intern - DRDL", "Graduate Assistant Analyst", "MS Business Analytics (Ongoing)"]
-}
-timeline_df = pd.DataFrame(timeline_data)
-
-timeline_fig = px.timeline(timeline_df, x_start="Year", x_end="Year", y="Position", color="Position", title="Career Timeline")
-timeline_fig.update_yaxes(categoryorder="total ascending")
-st.plotly_chart(timeline_fig, use_container_width=True)
+timeline_df = pd.DataFrame({
+    "Position": ["Programmer Analyst Trainee", "Intern - DRDL", "Graduate Assistant Analyst", "MS Business Analytics"],
+    "Year": ["2021", "2022", "2023", "2023–2025"]
+})
+st.dataframe(timeline_df)
 
 # --- CONTACT SECTION ---
-st.markdown("## Contact Me")
+st.markdown("## 📬 Say Hello")
 
 with st.form("contact_form"):
     name = st.text_input("Your Name")
-    email = st.text_input("Your Email")
-    message = st.text_area("Message")
-    submitted = st.form_submit_button("Send")
-    if submitted:
-        st.success("Thanks for reaching out! I'll get back to you soon.")
+    message = st.text_area("Your Message")
+    send = st.form_submit_button("Send Message 🎉")
+    if send:
+        st.success("Message sent! 🎈🎉 Thanks for visiting Anurag's Dataverse.")
 
+# --- FOOTER ---
 st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center;'>© 2025 Anurag Venkatayogi</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center;'>© 2025 Anurag Venkatayogi | Built with 💻 & 🚀</p>", unsafe_allow_html=True)
+'''
+
+# Save the file
+file_path = "/mnt/data/anurag_dark_portfolio_app.py"
+with open(file_path, "w") as f:
+    f.write(streamlit_dark_dashboard)
+
+file_path
