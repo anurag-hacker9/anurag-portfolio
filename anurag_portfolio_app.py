@@ -121,10 +121,3 @@ with st.form("contact_form"):
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>© 2025 Anurag Venkatayogi | Built with 💻 & 🚀</p>", unsafe_allow_html=True)
 '''
-
-# Save the file
-file_path = "/mnt/data/anurag_dark_portfolio_app.py"
-with open(file_path, "w") as f:
-    f.write(streamlit_dark_dashboard)
-
-file_path
