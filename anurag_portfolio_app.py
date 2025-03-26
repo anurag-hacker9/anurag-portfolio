@@ -1,6 +1,3 @@
-# Fixing the issue by properly escaping triple quotes and multi-line markdown
-
-streamlit_dark_dashboard = '''
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -8,7 +5,7 @@ import pandas as pd
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="Anurag's Dataverse", layout="wide", initial_sidebar_state="expanded")
 
-# --- CUSTOM CSS FOR DARK THEME & EFFECTS ---
+# --- CUSTOM DARK THEME CSS ---
 st.markdown(
     """
     <style>
@@ -16,8 +13,9 @@ st.markdown(
             background-color: #0e1117;
             color: white;
         }
-        .css-18e3th9 {
-            background-color: #0e1117 !important;
+        .stApp {
+            background-color: #0e1117;
+            color: white;
         }
         h1, h2, h3 {
             color: #00FFCC;
@@ -39,7 +37,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# --- BALLOON ON LOAD ---
+# --- BALLOON EFFECT ON LOAD ---
 st.balloons()
 
 # --- HERO SECTION ---
@@ -47,7 +45,7 @@ st.markdown("<h1 style='text-align: center;'>🌌 Welcome to Anurag's Dataverse<
 st.markdown("<h4 style='text-align: center;'>Data Analyst | ML Explorer | Visualization Alchemist</h4>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>Creating impact through code, charts, and a touch of magic ✨</p>", unsafe_allow_html=True)
 
-# --- LINKS ---
+# --- SOCIAL LINKS ---
 st.markdown("### 🔗 Connect With Me")
 st.markdown(
     """
@@ -57,7 +55,7 @@ st.markdown(
     """
 )
 
-# --- INTERACTIVE SKILLS DASHBOARD ---
+# --- INTERACTIVE SKILLSET DASHBOARD ---
 st.markdown("## 🚀 Skillset Visualizer")
 
 skills = {
@@ -81,7 +79,7 @@ fig = px.bar(skill_df, x="Proficiency", y="Skill", orientation="h", color="Skill
 fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(20,20,20,0.8)', font_color="white")
 st.plotly_chart(fig, use_container_width=True)
 
-# --- PROJECT HIGHLIGHTS ---
+# --- PROJECT SHOWCASE ---
 st.markdown("## 🌟 Project Highlights")
 
 col1, col2 = st.columns(2)
@@ -98,7 +96,7 @@ with col2:
     st.markdown("- Boosted booking efficiency and reduced host response time")
     st.markdown("[View on GitHub](https://github.com/anurag-github/airbnb-chatbot)")
 
-# --- CAREER TIMELINE MOCKUP ---
+# --- CAREER TIMELINE ---
 st.markdown("## 📅 Career Timeline")
 
 timeline_df = pd.DataFrame({
@@ -115,9 +113,8 @@ with st.form("contact_form"):
     message = st.text_area("Your Message")
     send = st.form_submit_button("Send Message 🎉")
     if send:
-        st.success("Message sent! 🎈🎉 Thanks for visiting Anurag's Dataverse.")
+        st.success("🎈 Thanks for reaching out! I’ll get back to you soon.")
 
 # --- FOOTER ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center;'>© 2025 Anurag Venkatayogi | Built with 💻 & 🚀</p>", unsafe_allow_html=True)
-'''
